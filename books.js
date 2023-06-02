@@ -1,6 +1,4 @@
 const mongoose = require('mongoose');
-const { connected } = require('process');
-const { Schema } = mongoose;
 
 // Defining the book schema
 const bookSchema = new mongoose.Schema({
