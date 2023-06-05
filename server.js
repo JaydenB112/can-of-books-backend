@@ -31,8 +31,18 @@ app.post('/books', async (request, response) => {
   }
 })
 
-app.delete('/books/:id')
+app.delete('/books/:id', async (request, response) => {
+  try {
+    await mongoose.connect(process.env.MONGODB)
+    const id = request.params.id;
+    const result = await books.findOneAndDelete({ id_: id });
+    response.send("Success")
+  }catch(error){
+    
+  }
 
+
+})
 
 app.listen(3001, () => {
   console.log(`Server Running on ${process.env.PORT}`)
