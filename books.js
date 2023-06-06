@@ -22,7 +22,7 @@ async function seed() {
 
         new Book({ title: 'War and Peace', description: 'Some famous book', status: 'Fiction' }),
         new Book({ title: 'To Kill a Mockingbird', description: 'Another Classic', status: 'Fiction' }),
-        new Book({ title: 'The 48 Laws of Power', descriptiom: 'Manipulation Tutorial', status: 'NonFiction' })
+        new Book({ title: 'The 48 Laws of Power', description: 'Manipulation Tutorial', status: 'NonFiction' })
 
 
     ];

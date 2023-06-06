@@ -37,11 +37,24 @@ app.delete('/books/:id', async (request, response) => {
     const id = request.params.id;
     const result = await books.findOneAndDelete({ id_: id });
     response.send("Success")
-  }catch(error){
-    
+  } catch (error) {
+
   }
 
 
+})
+
+app.put('/books/:id', async (request, response) => {
+  try {
+    await mongoose.connect(process.env.MONGODB)
+    const id = request.params.id;
+    const updatedBook = await books.findOneAndUpdate({ id_: id },
+      { title: title, description: description, status: status },
+      { new: true }
+    );
+  }catch(error){
+    
+  }
 })
 
 app.listen(3001, () => {
