@@ -17,7 +17,7 @@ app.use(verifyUser);
 
 app.get('/books', async (request, response) => {
   try {
-    console.log(request.auth)
+    console.log(request.user)
     const booksDos = await books.find()
     response.json(booksDos);
   } catch (error) {
