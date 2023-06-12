@@ -4,13 +4,14 @@ const mongoose = require('mongoose');
 const bookSchema = new mongoose.Schema({
     title: String,
     description: String,
-    status: String
+    status: String,
+    userEmail: String
 })
 
 //This is a model for my books
 const Book = mongoose.model('Book', bookSchema);
 async function seed() {
-   await mongoose.connect(process.env.MONGODB)
+    await mongoose.connect(process.env.MONGODB)
         .then(() => {
             console.log('connected')
         })
@@ -20,15 +21,18 @@ async function seed() {
     // Creating a new book array with defined books
     const bookData = [
 
-        new Book({ title: 'War and Peace', description: 'Some famous book', status: 'Fiction' }),
-        new Book({ title: 'To Kill a Mockingbird', description: 'Another Classic', status: 'Fiction' }),
-        new Book({ title: 'The 48 Laws of Power', description: 'Manipulation Tutorial', status: 'NonFiction' })
+        new Book({ title: 'War and Peace', description: 'Some famous book', status: 'Read' }),
+        new Book({ title: 'To Kill a Mockingbird', description: 'Another Classic', status: 'Plan to Read' }),
+        new Book({ title: 'The 48 Laws of Power', description: 'Manipulation Tutorial', status: 'Read' })
 
 
     ];
 
-   await Book.insertMany(bookData);
-    // mongoose.disconnect()
-}seed();
+    
+}
+
+
+// mongoose.disconnect()
+seed();
 
 module.exports = Book

@@ -5,33 +5,37 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose')
 const books = require('./books')
+const verifyUser = require('./verifyUser')
+const jwt = require('express-jwt')
 const app = express();
 app.use(cors());
 app.use(express.json())
 
 
+app.use(verifyUser);
+
 
 app.get('/books', async (request, response) => {
   try {
-    const booksDos = await books.find({userinfo:userEmail});
+    console.log(request.auth)
+    const booksDos = await books.find()
     response.json(booksDos);
   } catch (error) {
     console.error('Error retrieving books:', error);
     response.status(500).json({ error: 'Server error' });
   }
-  const accessToken = request.headers.authorization.split(' ')[1];
-  headers:{ authorization: `Bearer ${accessToken}`}
+  
 
 });
-const userinfo = user.data;
+// const userinfo = user.data;
 app.post('/books', async (request, response) => {
   try {
     const bookPull = request.body
     await books.insertMany(bookPull)
+    books.email = request.auth.email
     response.send(bookPull)
-    const accessToken = request.headers.authorization.split(' ')[1];
   } catch (error) {
-
+    console.error(error)
   }
 })
 
@@ -39,7 +43,7 @@ app.delete('/books/:id', async (request, response) => {
   try {
     await mongoose.connect(process.env.MONGODB)
     const id = request.params.id;
-    const result = await books.findOneAndDelete({ id_: id, userEmail:userinfo.email});
+    const result = await books.findOneAndDelete({ _id: id, });
     response.send("Success")
   } catch (error) {
 
@@ -52,11 +56,11 @@ app.put('/books/:id', async (request, response) => {
   try {
     await mongoose.connect(process.env.MONGODB)
     const id = request.params.id;
-    const updatedBook = await books.findOneAndUpdate({ id_: id, userEmail: userinfo.email},
+    const updatedBook = await books.findOneAndUpdate({ _id: id, },
       { title: title, description: description, status: status },
       { new: true }
     );
-      const booksWithUpdate = await books.find({ userEmail:userinfo.email });
+      const booksWithUpdate = await books.find({});
       response.send(booksWithUpdate);
   }catch(error){
     
