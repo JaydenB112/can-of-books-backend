@@ -21,14 +21,14 @@ async function seed() {
     // Creating a new book array with defined books
     const bookData = [
 
-        new Book({ title: 'War and Peace', description: 'Some famous book', status: 'Read' }),
-        new Book({ title: 'To Kill a Mockingbird', description: 'Another Classic', status: 'Plan to Read' }),
-        new Book({ title: 'The 48 Laws of Power', description: 'Manipulation Tutorial', status: 'Read' })
+        new Book({ title: 'War and Peace', description: 'Some famous book', status: 'Read', userEmail:'hoodawgy@gmail.com'}),
+        new Book({ title: 'To Kill a Mockingbird', description: 'Another Classic', status: 'Plan to Read', userEmail:'jaybizzle@gmail.com'}),
+        new Book({ title: 'The 48 Laws of Power', description: 'Manipulation Tutorial', status: 'Read', userEmail:'havingafitwithgit@yourmother.com' })
 
 
     ];
 
-    
+    Book.insertMany(bookData)
 }
 
 

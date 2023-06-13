@@ -17,8 +17,8 @@ app.use(verifyUser);
 
 app.get('/books', async (request, response) => {
   try {
-    console.log(request.user)
-    const booksDos = await books.find()
+    console.log(request?.user)
+    const booksDos = await books.find({email:request?.user?.email})
     response.json(booksDos);
   } catch (error) {
     console.error('Error retrieving books:', error);
@@ -31,8 +31,8 @@ app.get('/books', async (request, response) => {
 app.post('/books', async (request, response) => {
   try {
     const bookPull = request.body
+    bookPull.email = request.user?.email
     await books.insertMany(bookPull)
-    books.email = request.auth.email
     response.send(bookPull)
   } catch (error) {
     console.error(error)
