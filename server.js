@@ -53,10 +53,11 @@ app.delete('/books/:id', async (request, response) => {
 })
 
 app.put('/books/:id', async (request, response) => {
+  const { title,description,status }= request.body
   try {
     await mongoose.connect(process.env.MONGODB)
     const id = request.params.id;
-    const updatedBook = await books.findOneAndUpdate({ _id: id, },
+    const updatedBook = await books.findOneAndUpdate({ _id: id,  },
       { title: title, description: description, status: status },
       { new: true }
     );
